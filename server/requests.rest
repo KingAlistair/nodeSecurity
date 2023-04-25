@@ -1,0 +1,33 @@
+
+GET http://localhost:8080/posts
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkRhbmkiLCJpYXQiOjE2ODI0Mzc3NzYsImV4cCI6MTY4MjQzNzc5MX0.I4PHg3BZ2CV7EMLzoDpmDN9lncDDqx14t5ZJfoCH3pM
+###
+
+
+
+POST http://localhost:8080/post/login
+Content-Type: application/json
+
+{
+"username": "Dani"
+}
+
+
+###
+
+POST http://localhost:8080/token
+Content-Type: application/json
+
+{
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkRhbmkiLCJpYXQiOjE2ODI0MzgwMzR9.Q82s0MNUETFKy6tDnF1b-Tvc_ZF9275uHGcOjIRnKnA"
+}
+
+###
+
+DELETE http://localhost:8080/logout
+Content-Type: application/json
+
+{
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkRhbmkiLCJpYXQiOjE2ODI0MzgwMzR9.Q82s0MNUETFKy6tDnF1b-Tvc_ZF9275uHGcOjIRnKnA"
+}
+

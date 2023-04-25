@@ -1,6 +1,6 @@
 import db from "./connection.js";
 
-const isDeleteMode = process.argv.findIndex((argument) => argument === "delete_mode") === -1 ? false : true;
+const isDeleteMode = true;
 
 if (isDeleteMode) {
     db.exec(`DROP TABLE users;`);
