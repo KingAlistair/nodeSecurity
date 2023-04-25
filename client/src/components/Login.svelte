@@ -29,13 +29,13 @@
     }
 
     // if the API call succeeds, extract the token from the response
-    const { token } = await response.json();
+    const { accessToken, refreshToken } = await response.json();
 
     // update the store with the user information
-    login(username, token);
+    login(accessToken, refreshToken);
 
     // navigate to the main page
-    navigate("/main", { replace: true });
+    location.href = '/';
   }
 </script>
 
@@ -60,10 +60,6 @@
 </div>
 
 <style>
- body {
-  background-color: "gray";
- }
-
   .container {
     max-width: 400px;
     margin: 0 auto;

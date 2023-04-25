@@ -1,16 +1,20 @@
 import { writable } from 'svelte/store';
+import { navigate } from 'svelte-navigator';
 
-export const user = writable({
-  loggedIn: false,
-  username: null,
-  token: null
-});
+const storedUser = localStorage.getItem('user');
+const initialUser = storedUser ? JSON.parse(storedUser) : { accesToken: null, refreshToken: null };
 
-export const login = (username, token) => {
-  user.update(u => {
-    u.loggedIn = true;
-    u.username = username;
-    u.token = token;
-    return u;
-  });
+export const user = writable(initialUser);
+
+export const login = (accessToken, refreshToken) => {
+  const newUser = { accessToken, refreshToken };
+  localStorage.setItem('accessToken', accessToken);
+  localStorage.setItem('refreshToken', refreshToken);
+  user.set(newUser);
+};
+
+export const logout = () => {
+  localStorage.removeItem('accessToken');
+  localStorage.removeItem('refreshToken');
+  location.reload();
 };

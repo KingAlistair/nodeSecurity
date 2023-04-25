@@ -1,26 +1,17 @@
 
-GET http://localhost:8080/posts
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkRhbmkiLCJpYXQiOjE2ODI0Mzc3NzYsImV4cCI6MTY4MjQzNzc5MX0.I4PHg3BZ2CV7EMLzoDpmDN9lncDDqx14t5ZJfoCH3pM
-###
-
-
-
-POST http://localhost:8080/post/login
+POST http://localhost:8080/login
 Content-Type: application/json
 
 {
-"username": "Dani"
+    "username": "admin",
+    "password": "admin"
 }
 
 
 ###
 
-POST http://localhost:8080/token
-Content-Type: application/json
-
-{
-    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkRhbmkiLCJpYXQiOjE2ODI0MzgwMzR9.Q82s0MNUETFKy6tDnF1b-Tvc_ZF9275uHGcOjIRnKnA"
-}
+GET http://localhost:8080/user
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJhZG1pbiIsInBhc3N3b3JkIjoiYWRtaW4iLCJpc19hZG1pbiI6MSwiaWF0IjoxNjgyNDU2NDI4LCJleHAiOjE2ODI0NTczMjh9.xjmmIb7W2zENxnlhakfQskG_muNo2lE8d074YUE7syc
 
 ###
 
@@ -28,6 +19,5 @@ DELETE http://localhost:8080/logout
 Content-Type: application/json
 
 {
-    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkRhbmkiLCJpYXQiOjE2ODI0MzgwMzR9.Q82s0MNUETFKy6tDnF1b-Tvc_ZF9275uHGcOjIRnKnA"
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJhZG1pbiIsInBhc3N3b3JkIjoiYWRtaW4iLCJpc19hZG1pbiI6MSwiaWF0IjoxNjgyNDQ1NTMyLCJleHAiOjE2ODI0NDY0MzJ9.MO7UugqmfC4X2IX6PiL-_e5Ht0rTAdn3JfUfaBMJlhc"
 }
-

@@ -3,8 +3,16 @@ import jwt from 'jsonwebtoken';
 import db from "../databases/connection.js";
 
 const router = Router();
+let refreshTokens = [];
 
-// Endpoint to handle login requests
+
+// Get User information from token
+router.get("/user", authenticateToken, async (req, res) => {
+    const users = await db.all("SELECT * FROM users;");
+    res.json(users.find(user => user.username === req.user.username));
+});
+
+// Handl login requests
 router.post('/login', async (req, res) => {
     const { username, password } = req.body;
 
@@ -18,10 +26,34 @@ router.post('/login', async (req, res) => {
     }
 
     // Generate JWT token
-    const token = jwt.sign({ username }, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '1h' });
+    const token = generateAccessToken(user);
+    const refreshToken = jwt.sign(user, process.env.REFRESH_TOKEN_SECRET);
+    refreshTokens.push(refreshToken);
 
-    // Send the token back to the client
-    res.json({ accessToken: token });
+    res.send({ accessToken: token, refreshToken: refreshToken });
 });
+
+// Closes token
+router.delete('/logout', (req, res) => {
+    refreshTokens = refreshTokens.filter(token => token !== req.body.token)
+    res.sendStatus(204);
+});
+
+function generateAccessToken(user) {
+    return jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '15m' });
+}
+
+
+// Middleware that checks if user has a valid unexpired token 
+function authenticateToken(req, res, next) {
+    const token = req.headers['authorization'];
+    if (token == null) return res.sendStatus(401);
+
+    jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, user) => {
+        if (err) return res.sendStatus(403);
+        req.user = user;
+        next();
+    });
+}
 
 export default router;
