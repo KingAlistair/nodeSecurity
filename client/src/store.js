@@ -1,5 +1,4 @@
 import { writable } from 'svelte/store';
-import { navigate } from 'svelte-navigator';
 
 const storedUser = localStorage.getItem('user');
 const initialUser = storedUser ? JSON.parse(storedUser) : { accesToken: null, refreshToken: null };
@@ -16,5 +15,5 @@ export const login = (accessToken, refreshToken) => {
 export const logout = () => {
   localStorage.removeItem('accessToken');
   localStorage.removeItem('refreshToken');
-  location.reload();
+  location.replace("/login");
 };

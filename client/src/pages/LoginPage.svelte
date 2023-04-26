@@ -3,6 +3,9 @@
 </script>
 
 <div class="container">
-  <h1>Login</h1>
   <Login />
 </div>
+
+<style>
+  @import url('../style/global.css');
+</style>

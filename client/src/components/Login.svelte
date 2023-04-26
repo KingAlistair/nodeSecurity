@@ -39,8 +39,9 @@
   }
 </script>
 
-<div class="container">
+<div class="login">
   <form on:submit|preventDefault={handleSubmit}>
+    <h1>Login</h1>
     <label>
       Username:
       <input type="text" bind:value={username} />
@@ -59,48 +60,7 @@
   </form>
 </div>
 
+
 <style>
-  .container {
-    max-width: 400px;
-    margin: 0 auto;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    background-color: #252525;
-    color: #fff;
-  }
-
-  label {
-    display: block;
-    margin-bottom: 10px;
-  }
-
-  input[type="text"],
-  input[type="password"] {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 20px;
-    border: none;
-    border-radius: 4px;
-    background-color: #404040;
-    color: #fff;
-  }
-
-  input[type="text"]::placeholder,
-  input[type="password"]::placeholder {
-    color: #ccc;
-  }
-
-  button[type="submit"] {
-    background-color: #4CAF50;
-    color: #fff;
-    padding: 12px 20px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-
-  button[type="submit"]:hover {
-    background-color: #45a049;
-  }
+  @import url('../style/login.css');
 </style>

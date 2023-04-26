@@ -1,6 +1,7 @@
 <script>
   import { user } from "../store.js";
   import { navigate } from "svelte-navigator";
+  import Toast, { Toaster, toast } from "svelte-french-toast";
 
   let loggedIn = false;
   let username = "Guest";
@@ -16,52 +17,24 @@
     if (user) {
       loggedIn = true;
       username = user.username;
-    };
-  };
-
-  const logout = () => {
-    localStorage.removeItem("user");
-    navigate("/", { replace: true });
-  };
-
-  let name = "";
-  let email = "";
-  let message = "";
-
-  async function sendEmail() {
-    const response = await fetch("http://localhost:8080/contact", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ name, email, message }),
-    });
-
-    if (response.ok) {
-      alert("Email sent successfully!");
-    } else {
-      alert("Error sending email.");
+      toast.success(`Welcome ${username}!`);
     }
-
-    // Clear the form fields
-    name = "";
-    email = "";
-    message = "";
-  };
+  }
 </script>
 
-<h1>Welcome {username}!</h1>
+<div class="container">
+  <h1>Welcome {username}!</h1>
+  {#if loggedIn}
+    <p>Check out the Waiting room or feel free to contact us!</p>
+  {:else}
+    <p>
+      Our main page welcomes everyone, but to access the waiting room or contact
+      us, you need to login!
+    </p>
+  {/if}
+</div>
+<Toaster />
 
-<form on:submit|preventDefault={sendEmail}>
-  <label>
-    Name:
-    <input type="text" bind:value={name} required />
-  </label>
-  <label>
-    Email:
-    <input type="email" bind:value={email} required />
-  </label>
-  <label>
-    Message:
-    <textarea bind:value={message} required />
-  </label>
-  <button type="submit">Send</button>
-</form>
+<style>
+  @import url("../style/global.css");
+</style>

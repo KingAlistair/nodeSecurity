@@ -1,9 +1,8 @@
 <script>
   import { user, logout } from "../store.js";
-  import { navigate } from 'svelte-navigator';
 
   let loggedIn = false;
-  let username = "guest";
+  let username = "Guest";
 
   authenticateUser();
 
@@ -19,18 +18,22 @@
     } else {
       loggedIn = false;
       username = "guest";
-    };
-  };
+    }
+  }
 </script>
 
 <nav class="navbar">
   <ul>
-    <li>
-      <a href="/">Main Page</a>
-    </li>
-    {#if loggedIn}
+    
       <li>
-        <a href="/admin">Admin Page</a>
+        <a href="/">Main Page</a>
+      </li>
+      {#if loggedIn}
+      <li>
+        <a href="/waitingRoom">Waiting Room</a>
+      </li>
+      <li>
+        <a href="/contact">Contact us!</a>
       </li>
     {/if}
     <li class="right">

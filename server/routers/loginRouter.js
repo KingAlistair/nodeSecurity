@@ -1,6 +1,8 @@
 import { Router } from "express";
 import jwt from 'jsonwebtoken';
 import db from "../databases/connection.js";
+import bcrypt from "bcrypt";
+
 
 const router = Router();
 let refreshTokens = [];
@@ -12,26 +14,39 @@ router.get("/user", authenticateToken, async (req, res) => {
     res.json(users.find(user => user.username === req.user.username));
 });
 
-// Handl login requests
-router.post('/login', async (req, res) => {
-    const { username, password } = req.body;
 
-    //Retrive users from db
-    const users = await db.all("SELECT * FROM users;");
-
-    // Check if the username and password are correct
-    const user = users.find(u => u.username === username && u.password === password);
-    if (!user) {
-        return res.status(401).json({ error: 'Invalid username or password' });
-    }
-
-    // Generate JWT token
-    const token = generateAccessToken(user);
-    const refreshToken = jwt.sign(user, process.env.REFRESH_TOKEN_SECRET);
-    refreshTokens.push(refreshToken);
-
-    res.send({ accessToken: token, refreshToken: refreshToken });
+router.get("/allusers", (req, res) => {
+    const users =  db.all("SELECT * FROM users;");
+    res.send(users);
 });
+
+// Handle login requests
+router.post('/login', async (req, res) => {
+  const { username, password } = req.body;
+
+  // Retrieve users from db
+  const users = await db.all('SELECT * FROM users;');
+
+  // Check if the username exists
+  const user = users.find(u => u.username === username);
+  if (!user) {
+    return res.status(401).json({ error: 'Invalid username or password' });
+  }
+
+  // Compare the hashed password with the input password using bcrypt
+  const isMatch = await bcrypt.compare(password, user.password);
+  if (!isMatch) {
+    return res.status(401).json({ error: 'Invalid username or password' });
+  }
+
+  // Generate JWT token
+  const token = generateAccessToken(user);
+  const refreshToken = jwt.sign(user, process.env.REFRESH_TOKEN_SECRET);
+  refreshTokens.push(refreshToken);
+
+  res.send({ accessToken: token, refreshToken: refreshToken });
+});
+
 
 // Closes token
 router.delete('/logout', (req, res) => {
