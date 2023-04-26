@@ -4,6 +4,7 @@
 
 <div class="container">
   <Login />
+  <a href="/register">Not an user? Register!</a>
 </div>
 
 <style>

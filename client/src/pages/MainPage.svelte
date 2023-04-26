@@ -1,7 +1,5 @@
 <script>
-  import { user } from "../store.js";
-  import { navigate } from "svelte-navigator";
-  import Toast, { Toaster, toast } from "svelte-french-toast";
+ import { Toaster, toast } from "svelte-french-toast";
 
   let loggedIn = false;
   let username = "Guest";

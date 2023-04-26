@@ -1,4 +1,8 @@
 <script>
+ import { Toaster, toast } from "svelte-french-toast";
+
+toast.success("Feel free to contact us!")
+
     let name = "";
     let email = "";
     let message = "";
@@ -42,6 +46,8 @@
     <button type="submit">Send</button>
   </form>
 </div>
+
+<Toaster />
 
   <style>
     @import url('../style/global.css');
