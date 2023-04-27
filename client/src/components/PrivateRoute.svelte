@@ -1,11 +1,9 @@
 <script>
-  import { Route } from "svelte-navigator";
-  import { toast } from "svelte-french-toast";
+  import { Route, navigate } from "svelte-navigator";
 
   export let path;
   export let component;
 
-  //Checks if user is found in DB from token's user information
   async function authenticateUser() {
     const accessToken = localStorage.getItem("accessToken");
     const response = await fetch("http://localhost:8080/user", {
@@ -14,20 +12,16 @@
     const user = await response.json();
     if (user) {
       return true;
+    } else {
+      alert("Unauthorized access, redirecting to login page...");
+      navigate('/login');
+      return false;
     }
-    return false;
   }
 </script>
 
-{#await authenticateUser()}
-{:then authenticated}
+{#await authenticateUser() then authenticated}
   {#if authenticated}
     <Route {path} {component} />
-  {:else}
-    {#await Promise.resolve()}
-      <p>{@html toast('Unauthorized access, please login!')}</p>
-    {:then}
-      <p>You must be logged in to access this page.</p>
-    {/await}
   {/if}
 {/await}

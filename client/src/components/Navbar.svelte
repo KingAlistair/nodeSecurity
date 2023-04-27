@@ -1,34 +1,25 @@
 <script>
-  import { user, logout } from "../store.js";
+  import { logout } from "../store.js";
+  import { authenticateUser } from "../utils/authenticator.js";
 
   let loggedIn = false;
   let username = "Guest";
 
-  authenticateUser();
-
-  async function authenticateUser() {
-    const accessToken = localStorage.getItem("accessToken");
-    const response = await fetch("http://localhost:8080/user", {
-      headers: { Authorization: accessToken },
-    });
-    const user = await response.json();
-    if (user) {
-      loggedIn = true;
-      username = user.username;
-    } else {
-      loggedIn = false;
-      username = "guest";
-    }
-  }
+  // Calls authenticateUser function that updates loggedIn and username
+  (async function () {
+    const { loggedIn: isLoggedIn, username: loggedInUsername } =
+      await authenticateUser();
+    loggedIn = isLoggedIn;
+    username = loggedInUsername;
+  })();
 </script>
 
 <nav class="navbar">
   <ul>
-    
-      <li>
-        <a href="/">Main Page</a>
-      </li>
-      {#if loggedIn}
+    <li>
+      <a href="/">Main Page</a>
+    </li>
+    {#if loggedIn}
       <li>
         <a href="/waitingRoom">Waiting Room</a>
       </li>
@@ -47,50 +38,5 @@
 </nav>
 
 <style>
-  .navbar {
-    background-color: #333;
-    color: white;
-  }
-
-  .navbar ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-  }
-
-  .navbar li {
-    float: left;
-  }
-
-  .navbar li.right {
-    float: right;
-  }
-
-  .navbar li a {
-    display: block;
-    color: white;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-  }
-
-  .navbar li a:hover {
-    background-color: #ddd;
-    color: black;
-  }
-
-  .navbar button {
-    background-color: inherit;
-    color: white;
-    border: none;
-    cursor: pointer;
-    padding: 14px 16px;
-    font-size: 16px;
-  }
-
-  .navbar button:hover {
-    background-color: #ddd;
-    color: black;
-  }
+ @import url("../style/navbar.css");
 </style>

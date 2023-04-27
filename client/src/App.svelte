@@ -5,7 +5,8 @@
   import WaitingRoom from "./pages/WaitingRoom.svelte";
   import ContactPage from "./pages/ContactPage.svelte";
   import Navbar from "./components/Navbar.svelte";
-  import Register from "./pages/Register.svelte"
+  import Footer from "./components/Footer.svelte";
+  import Register from "./pages/Register.svelte";
   import PrivateRoute from "./components/PrivateRoute.svelte";
 </script>
 
@@ -18,3 +19,5 @@
   <Route path="/login" component={LoginPage} />
   <Route path="/register" component={Register} />
 </Router>
+
+<Footer />

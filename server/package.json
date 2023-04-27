@@ -5,8 +5,7 @@
   "type": "module",
   "main": "app.js",
   "scripts": {
-    "reset-database": "node ./databases/createDatabase.js delete_mode",
-    "create-database": "node ./databases/createDatabase.js"
+    "reset-database": "node ./databases/createDatabase.js"
   },
   "keywords": [],
   "author": "",

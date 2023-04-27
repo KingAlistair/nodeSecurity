@@ -1,36 +1,36 @@
 <script>
- import { Toaster, toast } from "svelte-french-toast";
+  import { Toaster, toast } from "svelte-french-toast";
 
-toast.success("Feel free to contact us!")
+  toast.success("Feel free to contact us!");
 
-    let name = "";
-    let email = "";
-    let message = "";
-  
-    async function sendEmail() {
-      const response = await fetch("http://localhost:8080/contact", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, email, message }),
-      });
-  
-      if (response.ok) {
-        alert("Email sent successfully!");
-      } else {
-        alert("Error sending email.");
-      }
-  
-      // Clear the form fields
-      name = "";
-      email = "";
-      message = "";
-    };
-    </script>
+  let name = "";
+  let email = "";
+  let message = "";
+
+  async function sendEmail() {
+    const response = await fetch("http://localhost:8080/contact", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ name, email, message }),
+    });
+
+    if (response.ok) {
+      alert("Email sent successfully!");
+    } else {
+      alert("Error sending email.");
+    }
+
+    // Clear the form fields
+    name = "";
+    email = "";
+    message = "";
+  }
+</script>
 
 <div class="container">
-  
-<form on:submit|preventDefault={sendEmail}>
-  <h2>Send us an email!</h2><br>
+  <form on:submit|preventDefault={sendEmail}>
+    <h2>Send us an email!</h2>
+    <br />
     <label>
       Name:
       <input type="text" bind:value={name} required />
@@ -49,7 +49,7 @@ toast.success("Feel free to contact us!")
 
 <Toaster />
 
-  <style>
-    @import url('../style/global.css');
-    @import url('../style/contactPage.css');
+<style>
+  @import url("../style/global.css");
+  @import url("../style/contactPage.css");
 </style>

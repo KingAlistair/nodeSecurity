@@ -1,11 +1,9 @@
 import db from "./connection.js";
 import bcrypt from "bcrypt";
 
-const isDeleteMode = true;
 
-if (isDeleteMode) {
-    db.exec(`DROP TABLE users;`);
-}
+
+db.exec(`DROP TABLE users;`);
 
 // (DDL)
 db.exec(`
@@ -18,9 +16,7 @@ CREATE TABLE IF NOT EXISTS users (
 );
 
 // Seeding (DML)
-if (isDeleteMode) {
-    const adminPassword = await bcrypt.hash("admin", 10);
-    db.exec(`INSERT INTO users (username, password) VALUES ('admin', '${adminPassword}');`);
-    const johnPassword = await bcrypt.hash("john123", 10);
-    db.exec(`INSERT INTO users (username, password) VALUES ('john', '${johnPassword}');`);
-}
+const adminPassword = await bcrypt.hash("admin", 10);
+db.exec(`INSERT INTO users (username, password) VALUES ('admin', '${adminPassword}');`);
+const johnPassword = await bcrypt.hash("john123", 10);
+db.exec(`INSERT INTO users (username, password) VALUES ('john', '${johnPassword}');`);

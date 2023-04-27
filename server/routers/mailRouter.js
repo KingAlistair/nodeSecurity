@@ -7,22 +7,21 @@ const router = Router();
 router.post('/contact', async (req, res) => {
     const { name, email, message } = req.body;
 
-    // Create a transporter object to send the email
+    // Transporter set up with an ethereal account
     const transporter = nodemailer.createTransport({
-      host: process.env.SMTP_HOST,
-      port: process.env.SMTP_PORT,
-      secure: process.env.SMTP_SECURE === 'true',
+      host: 'smtp.ethereal.email',
+      port: 587,
       auth: {
-        user: process.env.SMTP_USERNAME,
-        pass: process.env.SMTP_PASSWORD
-      }
+        user: process.env.HOST_EMAIL,
+        pass: process.env.HOST_PASSWORD,
+      },
     });
 
     try {
       // Define the email message
       const mailOptions = {
         from: email,
-        to: process.env.CONTACT_EMAIL,
+        to: process.env.HOST_EMAIL,
         subject: `New message from ${name}`,
         text: message
       };

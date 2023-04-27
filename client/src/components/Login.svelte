@@ -1,5 +1,5 @@
 <script>
-  import { navigate } from "svelte-navigator";
+
   import { login } from "../store.js";
 
   let username = "";
@@ -7,13 +7,13 @@
   let errorMessage = "";
 
   async function handleSubmit() {
-    // check if the username and password fields are not empty
+    // Check if the username and password fields are not empty
     if (username.trim() === "" || password.trim() === "") {
       errorMessage = "Please enter a username and password.";
       return;
     }
 
-    // attempt to log in using the API
+    // Attempt to login using the API
     const response = await fetch("http://localhost:8080/login", {
       method: "POST",
       headers: {
@@ -23,18 +23,17 @@
     });
 
     if (!response.ok) {
-      // if the API call fails, display an error message
+      // If the API call fails, display an error message
       errorMessage = "Invalid username or password.";
       return;
     }
 
-    // if the API call succeeds, extract the token from the response
+    // If the API call succeeds, extract the token from the response
     const { accessToken, refreshToken } = await response.json();
 
-    // update the store with the user information
+    // Update the store with the user information
     login(accessToken, refreshToken);
 
-    // navigate to the main page
     location.href = '/';
   }
 </script>
@@ -59,6 +58,7 @@
     <button type="submit">Login</button>
   </form>
 </div>
+<a href="/register">Not an user? Register!</a>
 
 
 <style>

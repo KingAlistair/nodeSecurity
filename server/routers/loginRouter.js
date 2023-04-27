@@ -10,14 +10,8 @@ let refreshTokens = [];
 
 // Get User information from token
 router.get("/user", authenticateToken, async (req, res) => {
-    const users = await db.all("SELECT * FROM users;");
-    res.json(users.find(user => user.username === req.user.username));
-});
-
-
-router.get("/allusers", (req, res) => {
-    const users =  db.all("SELECT * FROM users;");
-    res.send(users);
+  const users = await db.all("SELECT * FROM users;");
+  res.json(users.find(user => user.username === req.user.username));
 });
 
 // Handle login requests
@@ -47,28 +41,28 @@ router.post('/login', async (req, res) => {
   res.send({ accessToken: token, refreshToken: refreshToken });
 });
 
-
 // Closes token
 router.delete('/logout', (req, res) => {
-    refreshTokens = refreshTokens.filter(token => token !== req.body.token)
-    res.sendStatus(204);
+  refreshTokens = refreshTokens.filter(token => token !== req.body.token)
+  res.sendStatus(204);
 });
 
+// Creates new token with expire time of 15 minutes
 function generateAccessToken(user) {
-    return jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '15m' });
+  return jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '15m' });
 }
 
 
-// Middleware that checks if user has a valid unexpired token 
+// Middleware that checks if user has a valid, unexpired token 
 function authenticateToken(req, res, next) {
-    const token = req.headers['authorization'];
-    if (token == null) return res.sendStatus(401);
+  const token = req.headers['authorization'];
+  if (token == null) return res.sendStatus(401);
 
-    jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, user) => {
-        if (err) return res.sendStatus(403);
-        req.user = user;
-        next();
-    });
+  jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, user) => {
+    if (err) return res.sendStatus(403);
+    req.user = user;
+    next();
+  });
 }
 
 export default router;
