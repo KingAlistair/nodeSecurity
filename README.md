@@ -2,4 +2,4 @@
 
 # Node Security Site - Node.js Mandatory II
 
-The goal of this project was to develop a login page using the Svelte framework and Node.js with authentication, athorization and password encrypton.
+The goal of this project was to develop a login page using the Svelte framework and Node.js with authentication, athorization and password encryption.
