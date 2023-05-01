@@ -17,7 +17,7 @@ To get started with the project, follow these steps:
 Clone the repository to your local machine.
 Install the necessary dependencies using npm install.
 Start the server using npm start.
-Navigate to the login page at http://localhost:3000.
+Navigate to the login page at http://localhost:5370.
 Where users can get help with your project
 If you need help with the project, you can reach out to the project maintainers by opening an issue on the GitHub repository.
 
