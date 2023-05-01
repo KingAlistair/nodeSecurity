@@ -2,6 +2,7 @@
 <p align="center">
   <img src="https://user-images.githubusercontent.com/60754393/235303876-5cae66e8-0146-4ef8-a857-2ba426fdd52b.jpg" alt="lock">
 </p>
+
 ## What the project does
 The Node.js Security Site is an ongoing project that provides a secure login page built using the Svelte framework and Node.js. The project offers authentication, authorization, and password encryption for added security. It allows users to log in and access protected resources securely.
 
