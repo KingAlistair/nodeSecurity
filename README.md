@@ -8,7 +8,7 @@
 
 ## What the project does
 
-This project is a login page built using the Svelte framework and Node.js, which provides authentication, authorization, and password encryption for added security. It is designed to allow users to securely log in to the site and access protected resources.
+This ongoing project is a login page built using the Svelte framework and Node.js, which provides authentication, authorization, and password encryption for added security. It is designed to allow users to securely log in to the site and access protected resources.
 
 ## Why the project is useful
 
