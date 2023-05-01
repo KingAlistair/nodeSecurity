@@ -1,4 +1,4 @@
-![lock](https://user-images.githubusercontent.com/60754393/235303876-5cae66e8-0146-4ef8-a857-2ba426fdd52b.jpg)
+<p align="center">![lock](https://user-images.githubusercontent.com/60754393/235303876-5cae66e8-0146-4ef8-a857-2ba426fdd52b.jpg) </p>
 
 # Node.js Security Site
 
