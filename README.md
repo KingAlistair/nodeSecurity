@@ -27,4 +27,4 @@ If you need help with the project, you can reach out to the project maintainers 
 
 ## Who maintains and contributes to the project
 
-This project is currently maintained by [github.com/KingAlistair](https://github.com/KingAlistair) and welcomes contributions from the open-source community. If you would like to contribute, please submit a pull request on the GitHub repository.
+This project is currently maintained by [KingAlistair](https://github.com/KingAlistair) and welcomes contributions from the open-source community. If you would like to contribute, please submit a pull request on the GitHub repository.
