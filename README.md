@@ -12,9 +12,13 @@ Online security is a critical concern, and this project provides a secure way fo
 To get started with the project, follow these steps:
 
 1.Clone the repository to your local machine.
+
 2.Install the necessary dependencies using npm install.
+
 3.Start the server from the "server" folder: node run app.js
+
 4.Start the client-side server from the "client" folder: npm run dev.
+
 5.Navigate to the login page at http://localhost:5370.
 
 
